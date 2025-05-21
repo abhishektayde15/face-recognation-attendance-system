@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack - Student Registration</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 font-sans">
+  <div class="flex h-screen">
+    <!-- Sidebar -->
+    <aside class="w-64 bg-white shadow-md p-4">
+      <div class="text-2xl font-bold text-blue-600 mb-6">EduTrack</div>
+      <nav class="space-y-4">
+        <a href="final-solution.html" class="block text-gray-700 hover:text-blue-600">Mark Attendance</a>
+        <a href="view-attendance.html" class="block text-gray-700 hover:text-blue-600">View Attendance</a>
+        <a href="student-registration.html" class="block text-blue-600 font-medium">Manage Students</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col">
+      <header class="bg-white shadow px-6 py-4 flex justify-between items-center">
+        <h1 class="text-2xl font-semibold text-blue-600">Student Registration</h1>
+        <div class="text-gray-600">Welcome, Teacher</div>
+      </header>
+
+      <main class="p-6 overflow-y-auto">
+        <!-- Tabs -->
+        <div class="mb-6">
+          <ul class="flex border-b">
+            <li class="mr-1">
+              <a href="#" id="register-tab" class="bg-white inline-block py-2 px-4 text-blue-500 font-semibold border-l border-t border-r rounded-t">
+                Register Student
+              </a>
+            </li>
+            <li class="mr-1">
+              <a href="#" id="manage-tab" class="bg-gray-200 inline-block py-2 px-4 text-gray-700 font-semibold border-l border-t border-r rounded-t">
+                Manage Students
+              </a>
+            </li>
+            <li class="mr-1">
+              <a href="#" id="subjects-tab" class="bg-gray-200 inline-block py-2 px-4 text-gray-700 font-semibold border-l border-t border-r rounded-t">
+                Manage Subjects
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Register Student Tab -->
+        <div id="register-panel" class="bg-white rounded-lg shadow-md p-6">
+          <h2 class="text-xl font-bold mb-4 text-blue-600">Add New Student</h2>
+          
+          <form id="student-form" class="space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <!-- Basic Information -->
+              <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="name" name="name" class="w-full p-2 border border-gray-300 rounded" required>
+              </div>
+              
+              <div>
+                <label for="roll_number" class="block text-sm font-medium text-gray-700 mb-1">Roll Number</label>
+                <input type="text" id="roll_number" name="roll_number" class="w-full p-2 border border-gray-300 rounded" required>
+              </div>
+              
+              <div>
+                <label for="enrollment_number" class="block text-sm font-medium text-gray-700 mb-1">Enrollment Number</label>
+                <input type="text" id="enrollment_number" name="enrollment_number" class="w-full p-2 border border-gray-300 rounded" required>
+              </div>
+
+              <!-- Course Info -->
+              <div>
+                <label for="course" class="block text-sm font-medium text-gray-700 mb-1">Course</label>
+                <select id="course" name="course" class="w-full p-2 border border-gray-300 rounded" required>
+                  <option value="">Select Course</option>
+                  <option value="MCA">MCA</option>
+                  <option value="M.Tech">M.Tech</option>
+                  <option value="MBA (MS)">MBA (MS)</option>
+                  <option value="MBA(TOURISM)">MBA(TOURISM)</option>
+                  <option value="B PHARAMA">B PHARAMA</option>
+                  <option value="BBA">BBA</option>
+                </select>
+              </div>
+              
+              <div>
+                <label for="semester" class="block text-sm font-medium text-gray-700 mb-1">Semester</label>
+                <select id="semester" name="semester" class="w-full p-2 border border-gray-300 rounded" required>
+                  <option value="">Select Semester</option>
+                  <option value="1">Semester 1</option>
+                  <option value="2">Semester 2</option>
+                  <option value="3">Semester 3</option>
+                  <option value="4">Semester 4</option>
+                  <option value="5">Semester 5</option>
+                  <option value="6">Semester 6</option>
+                  <option value="7">Semester 7</option>
+                  <option value="8">Semester 8</option>
+                </select>
+              </div>
+              
+              <div>
+                <label for="section" class="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                <select id="section" name="section" class="w-full p-2 border border-gray-300 rounded" required>
+                  <option value="">Select Section</option>
+                  <option value="A">Section A</option>
+                  <option value="B">Section B</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Photo Upload -->
+            <div>
+              <label for="photo" class="block text-sm font-medium text-gray-700 mb-1">Student Photo</label>
+              <div class="mt-1 flex items-center">
+                <div id="photo-preview" class="w-32 h-32 border-2 border-gray-300 border-dashed rounded-md flex justify-center items-center mr-4 overflow-hidden">
+                  <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true">
+                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  <img id="preview-img" src="" alt="Photo Preview" class="hidden w-full h-full object-cover">
+                </div>
+                <div>
+                  <input type="file" id="photo" name="photo" accept="image/*" class="hidden">
+                  <button type="button" id="select-photo" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">Select Photo</button>
+                  <p class="mt-2 text-sm text-gray-500">Upload a clear frontal face photo. This will be used for face recognition.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex items-center justify-between">
+              <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Register Student
+              </button>
+              <button type="reset" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                Reset Form
+              </button>
+            </div>
+          </form>
+
+          <div id="register-result" class="mt-6 hidden"></div>
+        </div>
+
+        <!-- Manage Students Tab -->
+        <div id="manage-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-blue-600">Student List</h2>
+            <div class="flex space-x-2">
+              <button id="refresh-students" class="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
+                Refresh
+              </button>
+            </div>
+          </div>
+
+          <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label for="filter-course" class="block text-sm font-medium text-gray-700 mb-1">Filter by Course</label>
+              <select id="filter-course" class="w-full p-2 border border-gray-300 rounded">
+                <option value="">All Courses</option>
+                <!-- Options will be added dynamically -->
+              </select>
+            </div>
+            <div>
+              <label for="filter-semester" class="block text-sm font-medium text-gray-700 mb-1">Filter by Semester</label>
+              <select id="filter-semester" class="w-full p-2 border border-gray-300 rounded">
+                <option value="">All Semesters</option>
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+            <div>
+              <label for="filter-section" class="block text-sm font-medium text-gray-700 mb-1">Filter by Section</label>
+              <select id="filter-section" class="w-full p-2 border border-gray-300 rounded">
+                <option value="">All Sections</option>
+                <option value="A">Section A</option>
+                <option value="B">Section B</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="min-w-full divide-y divide-gray-200">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Roll No.</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Enrollment</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Course</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Semester</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Section</th>
+                  <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Photo</th>
+                </tr>
+              </thead>
+              <tbody id="students-table" class="bg-white divide-y divide-gray-200">
+                <!-- Loading placeholder -->
+                <tr>
+                  <td colspan="7" class="px-6 py-4 text-center text-sm text-gray-500">
+                    Loading students...
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div id="no-students-message" class="mt-4 text-center py-4 text-gray-500 hidden">
+            No students found. Please adjust your filters or add new students.
+          </div>
+        </div>
+
+        <!-- Manage Subjects Tab -->
+        <div id="subjects-panel" class="bg-white rounded-lg shadow-md p-6 hidden">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Add Subject Form -->
+            <div>
+              <h2 class="text-xl font-bold mb-4 text-blue-600">Add New Subject</h2>
+              <form id="subject-form" class="space-y-4">
+                <div>
+                  <label for="subject-name" class="block text-sm font-medium text-gray-700 mb-1">Subject Name</label>
+                  <input type="text" id="subject-name" name="name" class="w-full p-2 border border-gray-300 rounded" required>
+                </div>
+                
+                <div>
+                  <label for="subject-course" class="block text-sm font-medium text-gray-700 mb-1">Course</label>
+                  <select id="subject-course" name="course" class="w-full p-2 border border-gray-300 rounded" required>
+                    <option value="">Select Course</option>
+                    <!-- Options will be added dynamically -->
+                  </select>
+                </div>
+                
+                <div>
+                  <label for="subject-semester" class="block text-sm font-medium text-gray-700 mb-1">Semester</label>
+                  <select id="subject-semester" name="semester" class="w-full p-2 border border-gray-300 rounded" required>
+                    <option value="">Select Semester</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                  </select>
+                </div>
+                
+                <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                  Add Subject
+                </button>
+              </form>
+              
+              <div id="subject-result" class="mt-4 hidden"></div>
+            </div>
+            
+            <!-- View Subjects -->
+            <div>
+              <div class="flex justify-between items-center mb-4">
+                <h2 class="text-xl font-bold text-blue-600">Subject List</h2>
+                <button id="refresh-subjects" class="px-3 py-1 bg-blue-100 text-blue-600 rounded hover:bg-blue-200">
+                  Refresh
+                </button>
+              </div>
+              
+              <div class="grid grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label for="view-course" class="block text-sm font-medium text-gray-700 mb-1">Filter by Course</label>
+                  <select id="view-course" class="w-full p-2 border border-gray-300 rounded">
+                    <option value="">All Courses</option>
+                    <!-- Options will be added dynamically -->
+                  </select>
+                </div>
+                <div>
+                  <label for="view-semester" class="block text-sm font-medium text-gray-700 mb-1">Filter by Semester</label>
+                  <select id="view-semester" class="w-full p-2 border border-gray-300 rounded">
+                    <option value="">All Semesters</option>
+                    <option value="1">Semester 1</option>
+                    <option value="2">Semester 2</option>
+                    <option value="3">Semester 3</option>
+                    <option value="4">Semester 4</option>
+                    <option value="5">Semester 5</option>
+                    <option value="6">Semester 6</option>
+                    <option value="7">Semester 7</option>
+                    <option value="8">Semester 8</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div id="subjects-container" class="border rounded p-4 min-h-[300px]">
+                <div class="text-center py-4 text-gray-500">
+                  Loading subjects...
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  
+  <!-- Debug helper -->
+  <div id="debug-info" class="fixed bottom-0 right-0 bg-white p-2 text-xs text-gray-600 border border-gray-300 rounded shadow-md z-50">
+    Status: <span id="status">Ready</span>
+  </div>
+
+  <!-- Include external JavaScript file -->
+  <script src="/js/student-registration.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Flask
+face_recognition
+werkzeug

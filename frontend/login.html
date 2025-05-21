@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login | EduTrack</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gradient-to-r from-blue-200 to-green-200">
+  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Teacher Login</h2>
+    <form id="login-form">
+      <div id="error-message" class="hidden mb-4 p-3 bg-red-100 text-red-700 rounded"></div>
+      <input type="text" id="username" placeholder="Username" required class="w-full p-3 border rounded mb-4"/>
+      <input type="password" id="password" placeholder="Password" required class="w-full p-3 border rounded mb-4"/>
+      <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">Login</button>
+    </form>
+    <p class="mt-4 text-sm text-center text-gray-500">Use teacher/password123 to login</p>
+  </div>
+
+  <script>
+    document.getElementById("login-form").addEventListener("submit", function (e) {
+  e.preventDefault();
+  
+  const username = document.getElementById("username").value;
+  const password = document.getElementById("password").value;
+  const errorMessage = document.getElementById("error-message");
+  
+  // Simple credential check (for MVP)
+  if (username === "teacher" && password === "password123") {
+    // Set a session flag to indicate logged in state
+    sessionStorage.setItem("loggedIn", "true");
+    
+    // Handle redirect based on URL parameter
+    const params = new URLSearchParams(window.location.search);
+    const redirectPage = params.get("redirect");
+    
+    if (redirectPage === "mark") {
+      window.location.href = "final-solution.html";
+    } else if (redirectPage === "view") {
+      window.location.href = "view-attendance.html";
+    } else if (redirectPage === "manage") {
+      window.location.href = "manage-students.html";
+    } else {
+      // Default redirect
+      window.location.href = "final-solution.html";
+    }
+  } else {
+    // Show error message
+    errorMessage.textContent = "Invalid username or password";
+    errorMessage.classList.remove("hidden");
+  }
+});
+    
+    // Check if already logged in
+    window.addEventListener("DOMContentLoaded", function() {
+      if (sessionStorage.getItem("loggedIn") === "true") {
+        const params = new URLSearchParams(window.location.search);
+        const redirectPage = params.get("redirect");
+        
+        if (redirectPage === "mark") {
+          window.location.href = "final-solution.html";
+        } else if (redirectPage === "view") {
+          window.location.href = "view-attendance.html";
+        }
+      }
+    });
+  </script>
+</body>
+</html>
