@@ -1,3 +1,4 @@
 Flask
 face_recognition
 werkzeug
+dotenv
