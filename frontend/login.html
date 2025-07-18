@@ -36,14 +36,14 @@
     const redirectPage = params.get("redirect");
     
     if (redirectPage === "mark") {
-      window.location.href = "final-solution.html";
+      window.location.href = "mark-attendance.html";
     } else if (redirectPage === "view") {
       window.location.href = "view-attendance.html";
     } else if (redirectPage === "manage") {
       window.location.href = "manage-students.html";
     } else {
       // Default redirect
-      window.location.href = "final-solution.html";
+      window.location.href = "mark-attendance.html";
     }
   } else {
     // Show error message
@@ -59,7 +59,7 @@
         const redirectPage = params.get("redirect");
         
         if (redirectPage === "mark") {
-          window.location.href = "final-solution.html";
+          window.location.href = "mark-attendance.html";
         } else if (redirectPage === "view") {
           window.location.href = "view-attendance.html";
         }

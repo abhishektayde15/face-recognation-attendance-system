@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EduTrack - Attendance System</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 font-sans">
+  <div class="flex flex-col md:flex-row h-screen">
+    <!-- Sidebar -->
+    <aside class="w-full md:w-64 bg-white shadow-md p-4">
+      <div class="flex justify-between items-center">
+        <div class="text-2xl font-bold text-blue-600 mb-6">EduTrack</div>
+        <button id="mobile-menu-toggle" class="md:hidden bg-blue-500 text-white p-2 rounded">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+      <nav id="menu-items" class="space-y-4 hidden md:block">
+        <a href="mark-attendance.html" class="block text-gray-700 hover:text-blue-600">Dashboard</a>
+        <a href="mark-attendance.html" class="block text-blue-600 font-medium">Mark Attendance</a>
+        <a href="view-attendance.html" class="block text-gray-700 hover:text-blue-600">View Attendance</a>
+        <a href="manage-students.html" class="block text-gray-700 hover:text-blue-600">Manage Students</a>
+      </nav>
+    </aside>
+
+    <!-- Main content -->
+    <div class="flex-1 flex flex-col">
+      <header class="bg-white shadow px-4 py-4 flex justify-between items-center">
+        <h1 class="text-xl md:text-2xl font-semibold text-blue-600">Mark Attendance</h1>
+        <div class="text-gray-600 text-sm md:text-base">Welcome, Teacher</div>
+      </header>
+
+      <main class="p-4 md:p-6 overflow-y-auto">
+        <div id="app">
+          <!-- Step 1: Course Selection -->
+          <div id="step1" class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6">
+            <h2 class="text-lg md:text-xl font-bold mb-4 text-blue-600">Step 1: Select Course</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              <button type="button" onclick="selectCourse('MCA')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">MCA</button>
+              <button type="button" onclick="selectCourse('M.Tech')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">M.Tech</button>
+              <button type="button" onclick="selectCourse('MBA (MS)')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">MBA (MS)</button>
+              <button type="button" onclick="selectCourse('MBA(TOURISM)')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">MBA(TOURISM)</button>
+              <button type="button" onclick="selectCourse('B PHARAMA')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">B PHARAMA</button>
+              <button type="button" onclick="selectCourse('BBA')" class="course-btn bg-white shadow-md rounded-lg p-4 md:p-6 text-center text-base md:text-lg font-semibold text-blue-600 border border-green-300 hover:bg-green-100">BBA</button>
+            </div>
+          </div>
+
+          <!-- Step 2: Semester and Section -->
+          <div id="step2" class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6" style="display: none;">
+            <h2 class="text-lg md:text-xl font-bold mb-4 text-blue-600">Step 2: Select Semester and Section</h2>
+            <div class="flex flex-col md:flex-row gap-4 md:gap-6">
+              <div class="w-full md:w-1/2">
+                <label class="block mb-2 text-gray-700">Semester</label>
+                <select id="semester" onchange="checkStepTwo()" class="w-full p-2 border border-green-300 rounded">
+                  <option value="">Select Semester</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                  <option value="7">7</option>
+                  <option value="8">8</option>
+                </select>
+              </div>
+              <div class="w-full md:w-1/2">
+                <label class="block mb-2 text-gray-700">Section</label>
+                <select id="section" onchange="checkStepTwo()" class="w-full p-2 border border-green-300 rounded">
+                  <option value="">Select Section</option>
+                  <option value="A">A</option>
+                  <option value="B">B</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-4">
+              <button type="button" onclick="backToStep(1)" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Back</button>
+            </div>
+          </div>
+
+          <!-- Step 3: Select Subject -->
+          <div id="step3" class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6" style="display: none;">
+            <h2 class="text-lg md:text-xl font-bold mb-4 text-blue-600">Step 3: Select Subject</h2>
+            
+            <div>
+              <label class="block mb-2 text-gray-700">Subject</label>
+              <select id="subject" class="w-full p-2 border border-green-300 rounded">
+                <option value="">Select Subject</option>
+                <!-- Subjects will be loaded dynamically -->
+              </select>
+            </div>
+            
+            <div class="mt-4 flex flex-wrap gap-4">
+              <button type="button" onclick="backToStep(2)" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Back</button>
+              <button type="button" onclick="goToStep(4)" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Next</button>
+            </div>
+          </div>
+
+          <!-- Step 4: Upload Photos -->
+          <div id="step4" class="bg-white rounded-lg shadow-md p-4 md:p-6 mb-6" style="display: none;">
+            <h2 class="text-lg md:text-xl font-bold mb-4 text-blue-600">Step 4: Upload Class Photos</h2>
+            
+            <div>
+              <label class="block mb-2 text-gray-700">Select one or more photos</label>
+              <input type="file" id="photos" multiple accept="image/*" class="p-2 border border-green-300 w-full rounded">
+            </div>
+            
+            <div class="mt-4 flex flex-wrap gap-4">
+              <button type="button" onclick="backToStep(3)" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">Back</button>
+              <button id="upload-btn" type="button" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Submit</button>
+            </div>
+          </div>
+
+          <!-- Step 5: Results -->
+          <div id="step5" class="bg-white rounded-lg shadow-md p-4 md:p-6" style="display: none;">
+            <h2 class="text-lg md:text-xl font-bold mb-4 text-blue-600">Results</h2>
+            <div id="results-content" class="mb-6 p-4 border border-gray-200 rounded-lg min-h-[200px]">
+              Processing...
+            </div>
+            
+            <!-- Current date selection -->
+            <div class="mb-4">
+              <label class="block mb-2 text-gray-700">Attendance Date</label>
+              <input type="date" id="attendance-date" class="p-2 border border-green-300 rounded" value="">
+            </div>
+            
+            <div class="flex flex-wrap gap-4">
+              <button type="button" onclick="resetForm()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Mark New Attendance</button>
+              <button id="store-btn" type="button" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Store Attendance</button>
+              <a href="terminal-results.html" target="_blank" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 inline-block">View Results in Terminal</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <!-- Debug helper -->
+  <div id="debug-info" class="fixed bottom-0 right-0 bg-white p-2 text-xs text-gray-600 border border-gray-300 rounded shadow-md z-50">
+    Status: <span id="status">Ready</span>
+  </div>
+<script src="js/mark-attendance.js"></script>
+ 
+<!-- Add loading indicator -->
+<div id="loading-indicator" style="display: none;" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white p-5 rounded-lg shadow-lg text-center">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto mb-3"></div>
+        <p class="text-lg font-semibold">Processing attendance...</p>
+        <p class="text-sm text-gray-600 mt-2">Please wait, this may take a minute.</p>
+    </div>
+</div></body>
+</html>
