@@ -10,10 +10,10 @@ from datetime import datetime
 
 # MySQL Configuration
 DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': 'Abhishek@1512',
-    'database': 'attendance'
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'user': os.environ.get('DB_USER', 'root'),
+    'password': os.environ.get('DB_PASSWORD', 'Abhishek@1512'), # IMPORTANT: Change this in your environment variables!
+    'database': os.environ.get('DB_NAME', 'attendance')
 }
 
 def create_mysql_connection():

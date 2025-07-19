@@ -26,10 +26,10 @@ os.makedirs(DEBUG_FOLDER, exist_ok=True)
 
 # MySQL Configuration
 DB_CONFIG = {
-    'host': 'localhost',     # Change as needed
-    'user': 'root',          # Change to your MySQL username
-    'password': 'Abhishek@1512',  # Change to your MySQL password
-    'database': 'attendance' # This is the database name
+    'host': os.environ.get('DB_HOST', 'localhost'),
+    'user': os.environ.get('DB_USER', 'root'),
+    'password': os.environ.get('DB_PASSWORD', 'Abhishek@1512'), # IMPORTANT: Change this in your environment variables!
+    'database': os.environ.get('DB_NAME', 'attendance')
 }
 
 # Dummy database to keep attendance (for backward compatibility)
